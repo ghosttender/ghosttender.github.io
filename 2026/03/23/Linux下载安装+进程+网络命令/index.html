@@ -1,0 +1,651 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Linux下载安装+进程+网络命令 | 北辰的BLOG</title><meta name="keywords" content="Linux"><meta name="author" content="北辰"><meta name="copyright" content="北辰"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Linux下载安装+进程+网络命令"><meta name="application-name" content="Linux下载安装+进程+网络命令"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Linux下载安装+进程+网络命令"><meta property="og:url" content="http://example.com/2026/03/23/Linux%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85+%E8%BF%9B%E7%A8%8B+%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4/index.html"><meta property="og:site_name" content="北辰的BLOG"><meta property="og:description" content="教学目标 晨考复习 作业问题 Linux-下载安装 Linux-进程与网络命令  教学内容1.晨考复习1.用户与用户组是什么关系? Linux系统中用户分为哪几种?  Linux系统中的用户都有一个主组,可以有多个附属组  每个组可以包含 多个用户,一个组可以是多个用户的主组及附属组  超级用户 r"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323130307580.jpg"><meta property="article:author" content="北辰"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323130307580.jpg"><meta name="description" content="教学目标 晨考复习 作业问题 Linux-下载安装 Linux-进程与网络命令  教学内容1.晨考复习1.用户与用户组是什么关系? Linux系统中用户分为哪几种?  Linux系统中的用户都有一个主组,可以有多个附属组  每个组可以包含 多个用户,一个组可以是多个用户的主组及附属组  超级用户 r"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323130307580.jpg"><link rel="canonical" href="http://example.com/2026/03/23/Linux%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85+%E8%BF%9B%E7%A8%8B+%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 北辰","link":"链接: ","source":"来源: 北辰的BLOG","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '北辰的BLOG',
+  title: 'Linux下载安装+进程+网络命令',
+  postAI: '',
+  pageFillDescription: '教学目标, 教学内容, 1.晨考复习, 2.作业问题-解压配置tomcat, 3.Linux-下载与安装, 3-1 下载, 3-2 安装软件, 3-2-1 yum工具, 案例1 使用yum安装httpd服务, 3-2-2 rpm工具, 案例2使用rpm安装mysql数据库, 案例3把woniu进销存项目部署至Linux服务器, 3-2-3 源码安装, 4.Linux-进程与网络命令, 4-1 进程相关, 4-1-1 概述, 4-1-2 查看进程命令, 4-1-3 进程控制命令, 4-1-4 系统服务控制命令, 4-2 网络相关, 4-2-1 网络工具, 4-2-2 网络命令, 4-2-3 网络IP配置, 4-2-4 SSH免密登录教学目标晨考复习作业问题下载安装进程与网络命令教学内容晨考复习用户与用户组是什么关系系统中用户分为哪几种系统中的用户都有一个主组可以有多个附属组每个组可以包含多个用户一个组可以是多个用户的主组及附属组超级用户系统用户不能登录普通用户中查看组用户与密码信息的配置文件分别是组信息配置文件用户信息配置文件用户密码信息配置文件组密码信息配置文件命令显示的文件权限信息中每一列代表什么意义个列个字符文件类型及权限标识个字符文件或目录的链接数数字文件目录拥有者用户名组名文件大小最后修改日期时间文件或目录的名称权限对于文件与目录分别表示什么含义文件目录查看文件内容修改文件内容执行文件说明以下命令作用临时修改主机名刷新文本字符串匹配修改文件或目录所有者修改文件或目录所属组修改文件或目录的权限字符模式与数字模式关联用户与组的命令写出的关机与重启命令至少种关机重启取消关机或重启压缩与解压缩相关命令使用压缩算法创建一个名为的压缩归档文件其中包含当前目录中的所有文件和文件夹使用压缩算法创建一个名为的压缩归档文件其中包含当前目录中的所有文件和文件夹将压缩归档文件解压到目录中查看压缩包中的文件列表写出命令上传至服务器用户下的目录语法本地文件的路径服务器作业问题解压配置上传归档压缩包工具相关进入系统中目录下解压缩在目录下创建软链接与查看防火墙状态停止防火墙开启下的打开浏览器访问首页下载与安装下载作用一般用来使用地址进行文件传输也可以用来下载东西语法选项网址选项指定将网址对应的内容输出到指定文件中如果不带则直接输出到屏幕上作用用来下载工具安装使用下载软件语法选项地址选项断点续传后台下载示例在线下载方式方式安装软件系统中安装软件有四种方式绿色版安装解压和配置环境变量在线下载并安装等同于软件管家离线包的安装源码安装编译安装工具定义软件管理工具包管理包语法选项命令命令安装卸载列表更新查找清空过期缓存刷新缓存操作安装过程直接同意配置下载源备份直接下载镜像文件直接替换默认情况下会将下载的文件保存为中的原始文件名如会保存为使用可覆盖此行为将文件重命名为任意自定义名称清除旧的无效的缓存刷新缓存常用操作搜索查找程序程序名检查当前使用的下载源镜像仓库类型删除已经安装的程序程序名安装软件包程序名查询已经安装好的软件软件名关键字名例案例使用安装服务安装启动设置开机启动设置开机不启动验证端口进入到系统在浏览器中输入网址端口编写网页内容编辑我的网页欢迎访问我的网页保存再去访问端口工具命令是软件包的管理工具类似中的安装包语法选项参数显示当前系统中所有以方式安装的所有的软件列表查看指定包的各种信息名称版本许可证所有的文件列表查看指定文件是哪个包安装的显示指令执行过程详细显示指令执行过程便于排错示例查看软件包中的文件列表查看软件包的信息查看是否已安装某个软件包筛选已安装的软件包如何通过安装程序安装包名如果在安装时出现依赖检查某个依赖的软件包没有先安装则会安装失败卸载包名其中选项表示忽略依赖关系直接卸载如果不使用此选项可能会因为依赖问题导致卸载失败显示执行过程日志在安装过程中显示带有的进度条是的命令中的一个用于安装升级或卸载软件包时跳过依赖关系检查案例使用安装数据库上传服务端与客户端安装包工具相关工具相关卸载掉残留的系统自带的数据库查看系统中是否安装了执行卸载命令删除目录查看目录删除目标目录开始安装服务端注意如果安装时出现依赖检测失败则我们需要先安装依赖的软件包然后再次安装系统提示的随机密码是文件中安装客户端查看安装的软件信息开启服务尝试本地登录修改随机密码为固定密码输入旧密码输入原始的随机密码可通过查看使用新密码登录案例把进销存项目部署至服务器导入数据库文件上传文件网安资料网安一阶段工具及环境包项目登录之后创建数据库切换当前使用的数据库查看当前数据库中的表信息导入上传项目包至目录中的网安资料网安一阶段工具及环境包项目启动服务项目自动解压修改项目的数据库配置文件密码改为当前数据库服务器的密码保存退出重启服务器通过物理机浏览器访问项目源码安装四个步骤解压运行配置文件编译安装进程与网络命令进程相关概述进程计算机操作系统执行应用程序就会产生相应的进程是系统进行资源分配的基本单位是操作系统结构的基础查看进程命令语法参数报告当前系统的正在运行的进程状态类比任务管理器常用的参数当前终端下的所有进程信息包含其他用户的进程以用户为主的格式来显示程序状况显示所有终端的所有进程信息含没有终端的如显示所有进程以详细的模式展示进程显示与栏位示例用户进程号占用百分比内存占用百分比占用虚拟内存空间物理磁盘空间的大小常驻内存物理内存大小表示进程在哪个终端上运行表示不需要终端运行显示进程状态如休眠运行僵死高优先级低优先级父进程前台进程该程序应该已经终止但是其父程序却无法正常的终止他造成僵尸程序的状态启动的时间运行时间占用时间启动该进程的名字查看所有的进程信息查看进程信息命令定义是一个动态的进程检测程序每刷新一次类似的任务管理器输入退出快捷键按键根据占用情况对进程列表进行排序按键根据内存占用情况进行排序按键根据启动时间进行排序按键可以获得程序的在线帮助信息按键可以正常地退出程序也可以终止进程按键后输入号后可以直接中止进程等同于命令作用用于查找进程类似于语法选项正则表达式常用选项输出列表对应的进程名称指定用户进程示例进程名称是开头的依从性进程名是以结尾的查看用户的的进程信息进程控制命令后台运行语法命令示例在后台运行命令查看后台进程挂起当前进程快捷键已停止恢复挂起的进程进程序号后台切换到前台查看被挂起的进程中止进程快捷键中止当前正在运行的进程命令命令使用号作为参数使用选项强制中止语法选项进程编号终端挂断中断同退出同强制终止终止继续与相反命令暂停同杀死进程系统服务控制命令命令作用主要对系统的服务进行管理启动停止查看状态开机自启服务名关闭防火墙临时禁用防火墙重启后不会启动重启防火墙查看防火墙状态设置开机自动启动查看系统中所有的服务查看系统中服务开机自启的状态示例查看所有开机自启的服务网络相关网络工具这个是自带的网络工具包比如这个是的第三方套装工具比如查看端口占用与工具比较套装工具命令套装工具命令说明查看网卡信息等查看缓存查看查看网卡收发数据包的大小收发为网卡添加一个临时的地址为网卡删除一个地址查看路由表添加路由条目删除路由条目添加默认路由网络命令作用查看网络协议及进程与端口的状态信息显示当前主机中所有活动的网络连接信息包括监听非监听状态的服务端口以数字的形式显示相关的主机地址端口等信息显示路由表信息显示处于监听状态的网络连接及端口信息查看传输控制协议相关的信息显示用户数据报协议协议相关的信息显示与网络连接相关联的进程号进程名称信息该选项需要权限作用查看网卡的配置信息作用检测网络是否通解析常见参数完成次数设置完成要求回应的次数网络界面使用指定的网络界面送出数据包数据包大小设置数据包的大小存活数值设置存活数值的大小超时秒数无论之前发送或接受了多少包只要超过此秒数程序退出等待时间只接收个回包只接收个回包如果超过秒则程序终止路由跳转查看作用路由追踪安装配置查看安装解析域名非权威应答作用用于流量捕获类似工具主要是用来抓包嗅探器工具可以打印所有经过网络接口的数据包的头信息可以使用把数据包保存到文件中以便分析类似于工具安装语法网卡名称示例捕获网卡所有的数据包捕获协议包捕获网卡中端口所有的数据包捕获网卡中端口所有的数据包把数据包写入到可以下载到本地使用查看捕获网卡所有的数据包数据包到个后自动停止过滤访问的选项尝试将网络和广播地址转换成名称数据包数目收到指定的数据包数目后就停止进行倾倒操作把编译过的数据包编码转换成可阅读的格式并倾倒到标准输出把编译过的数据包编码转换成语言的格式并倾倒到标准输出把编译过的数据包编码转换成十进制数字的格式并倾倒到标准输出在每列倾倒资料上显示连接层级的文件头用数字显示网际网络地址表达文件指定内含表达方式的文件网络界面使用指定的网络界面送出数据包使用标准输出列的缓冲区不把主机的网络地址转换成名字不列出域名不将数据包编码最佳化不让网络界面进入混杂模式快速输出仅列出少数的传输协议信息数据包文件从指定的文件读取数据包数据数据包大小设置每个数据包的大小用绝对而非相对数值列出关联数在每列倾倒资料上不显示时间戳记在每列倾倒资料上显示未经格式化的时间戳记数据包类型强制将表达方式所指定的数据包转译成设置的数据包类型详细显示指令执行过程更详细显示指令执行过程用十六进制字码列出数据包资料数据包文件把数据包数据写入指定的文件网络配置修改动态为静态在中有网卡文件我们可以通过修改网卡文件来配置网络编辑网卡文件编辑之前备份网卡文件修改保存重启网卡服务如果起不来那么检查网卡文件通过查看免密登录实现过程在物理机作为客户端上生成公钥和私钥使用然后回车次生成对应的公钥和私钥如果把公钥上传到目标服务器则我可以使用私钥免密登录别人的服务器是公钥前面的是私钥公共的把公钥复制到服务器中进入用户目录在用户目录创建文件夹进入到文件把公钥复制到目录把公钥重命名为使用私钥进行远程连接语法电脑的账号电脑的客户端连接服务器备注如果使用上述免密方式登录时提示输入密码则可能生成私钥有问题也有可能是服务器的公钥授权登录功能未开启如果是公钥登录未开启则按以下步骤输入搜索将前面去掉保存退出重启服务注意放在哪个用户的家目录连上去就是哪个用户',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-03-23 20:24:36',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 8.1.1"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323130307580.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://ghosttender.github.io/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323130307580.jpg" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">北辰的BLOG</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323143350183.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323143350183.png"/></a><div class="post-qr-code-desc">微信</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url">Linux操作系统</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Linux/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Linux</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Linux下载安装+进程+网络命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-03-23T12:20:02.000Z" title="发表于 2026-03-23 20:20:02">2026-03-23</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-23T12:24:36.328Z" title="更新于 2026-03-23 20:24:36">2026-03-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323130307580.jpg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/03/23/Linux%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85+%E8%BF%9B%E7%A8%8B+%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4/"><header><a class="post-meta-categories" href="/categories/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url">Linux操作系统</a><a href="/tags/Linux/" tabindex="-1" itemprop="url">Linux</a><h1 id="CrawlerTitle" itemprop="name headline">Linux下载安装+进程+网络命令</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">北辰</span><time itemprop="dateCreated datePublished" datetime="2026-03-23T12:20:02.000Z" title="发表于 2026-03-23 20:20:02">2026-03-23</time><time itemprop="dateCreated datePublished" datetime="2026-03-23T12:24:36.328Z" title="更新于 2026-03-23 20:24:36">2026-03-23</time></header><h1 id="教学目标"><a href="#教学目标" class="headerlink" title="教学目标"></a>教学目标</h1><ul>
+<li>晨考复习</li>
+<li>作业问题</li>
+<li>Linux-下载安装</li>
+<li>Linux-进程与网络命令</li>
+</ul>
+<h1 id="教学内容"><a href="#教学内容" class="headerlink" title="教学内容"></a>教学内容</h1><h2 id="1-晨考复习"><a href="#1-晨考复习" class="headerlink" title="1.晨考复习"></a>1.晨考复习</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">1.用户与用户组是什么关系? Linux系统中用户分为哪几种?</span><br><span class="line">  Linux系统中的用户都有一个主组,可以有多个附属组</span><br><span class="line">  每个组可以包含 多个用户,一个组可以是多个用户的主组及附属组</span><br><span class="line"></span><br><span class="line">  超级用户 root</span><br><span class="line">  系统用户  - 不能登录</span><br><span class="line">  普通用户</span><br><span class="line">                            </span><br><span class="line">2.Linux中查看组,用户与密码信息的配置文件分别是?</span><br><span class="line"> 组信息配置文件    /etc/group</span><br><span class="line"> 用户信息配置文件  /etc/passwd</span><br><span class="line"> 用户密码信息配置文件  /etc/shadow     【组密码信息配置文件: /etc/gshadow】</span><br><span class="line">  </span><br><span class="line">3.<span class="built_in">ls</span> -l命令显示的文件权限信息中，每一列代表什么意义?</span><br><span class="line">   7个列</span><br><span class="line">   &lt;1&gt; 10个字符 - 文件类型及权限标识(9个字符)</span><br><span class="line">   &lt;2&gt; 文件或目录的链接数    数字 ： 1-文件 2-目录</span><br><span class="line">   &lt;3&gt; 拥有者用户名</span><br><span class="line">   &lt;4&gt; 组名</span><br><span class="line">   &lt;5&gt; 文件大小</span><br><span class="line">   &lt;6&gt; 最后修改日期时间</span><br><span class="line">   &lt;7&gt; 文件或目录的名称</span><br><span class="line"></span><br><span class="line">4.权限rwx对于文件与目录分别表示什么含义？</span><br><span class="line">             文件                  目录</span><br><span class="line">   r      查看文件内容       <span class="built_in">ls</span></span><br><span class="line">   w     修改文件内容       <span class="built_in">mkdir</span>,<span class="built_in">rmdir</span>...</span><br><span class="line">   x      执行文件              <span class="built_in">cd</span> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">5.说明以下命令作用:</span><br><span class="line">  hostname 临时修改主机名, bash刷新</span><br><span class="line">   grep 文本字符串匹配,</span><br><span class="line">   <span class="built_in">chown</span> 修改文件或目录所有者 </span><br><span class="line">   <span class="built_in">chgrp</span> 修改文件或目录所属组</span><br><span class="line">  <span class="built_in">chmod</span> 修改文件或目录的权限  &lt;字符模式与数字模式&gt;</span><br><span class="line">  gpasswd 关联用户与组的命令</span><br><span class="line">   </span><br><span class="line">6.写出Linux的关机与重启命令(至少2种)</span><br><span class="line">   init 0   -   init 6 </span><br><span class="line"></span><br><span class="line">   poweroff   reboot</span><br><span class="line">   </span><br><span class="line">   shutdown  -h  关机   now | 12:00 | +30</span><br><span class="line">   shutdown  -r 重启     now |  12:00| +30</span><br><span class="line"></span><br><span class="line">   shutdown -c 取消关机或重启 cancel</span><br><span class="line">  </span><br><span class="line">7.压缩与解压缩相关命令</span><br><span class="line">  (1) 使用gzip压缩算法创建一个名为backup.tar.gz的压缩归档文件，</span><br><span class="line">       其中包含当前目录中的所有文件和文件夹</span><br><span class="line">      tar -zcvf backup.tar.gz *</span><br><span class="line">  </span><br><span class="line">  (2) 使用bzip2压缩算法创建一个名为backup.tar.bz2的压缩归档文件，</span><br><span class="line">    其中包含当前目录中的所有文件和文件夹</span><br><span class="line">     tar -jcvf backup.tar.bz2 *</span><br><span class="line"></span><br><span class="line">  (3) 将压缩归档文件backup.tar.gz解压到/opt目录中</span><br><span class="line">      tar -zxvf  backup.tar.gz  -C /opt</span><br><span class="line"> </span><br><span class="line">  (4) 查看backup.tar.gz压缩包中的文件列表</span><br><span class="line">     tar -tf backup.tar.gz</span><br><span class="line"> </span><br><span class="line">8.写出scp命令上传至Linux服务器root用户下的/root目录语法</span><br><span class="line">   scp 本地文件的路径 root@服务器IP:/root</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-作业问题-解压配置tomcat"><a href="#2-作业问题-解压配置tomcat" class="headerlink" title="2.作业问题-解压配置tomcat"></a>2.作业问题-解压配置tomcat</h2><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment">#step1: 上传归档压缩包</span></span><br><span class="line">C:\Users\ThinkPad&gt;scp E:\GP\Course\PBET-NetSecure-I\工具相关\apache-tomcat-9.0.68.tar.gz root@192.168.128.140:/opt</span><br><span class="line"></span><br><span class="line"><span class="comment">#step2: 进入Linux系统中/opt目录下,解压缩</span></span><br><span class="line">tar -zxvf apache-tomcat-9.0.68.tar.gz </span><br><span class="line"></span><br><span class="line"><span class="comment">#step3: 在/opt目录下创建软链接start与stop</span></span><br><span class="line">ln -s /opt/apache-tomcat-9.0.68/bin/startup.sh start</span><br><span class="line">ln -s /opt/apache-tomcat-9.0.68/bin/shutdown.sh stop</span><br><span class="line"></span><br><span class="line"><span class="comment">#step4: 查看Linux防火墙状态</span></span><br><span class="line">systemctl status firewalld</span><br><span class="line"><span class="comment">#step5: 停止防火墙</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line"></span><br><span class="line"><span class="comment">#step6: 开启/opt/下的start</span></span><br><span class="line">./start</span><br><span class="line"></span><br><span class="line"><span class="comment">#step7: 打开浏览器访问tomcat首页</span></span><br><span class="line">http://192.168.128.140:8080</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Linux-下载与安装"><a href="#3-Linux-下载与安装" class="headerlink" title="3.Linux-下载与安装"></a>3.Linux-下载与安装</h2><h3 id="3-1-下载"><a href="#3-1-下载" class="headerlink" title="3-1 下载"></a>3-1 下载</h3><ul>
+<li>curl</li>
+</ul>
+<p>作用: 一般用来使用url地址进行文件传输，也可以用来下载东西</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">语法:  curl [选项] 网址</span><br><span class="line"></span><br><span class="line">选项:</span><br><span class="line">-o 指定将网址对应的内容输出到指定文件中</span><br><span class="line">	【如果不带则直接输出到屏幕上】</span><br><span class="line"></span><br><span class="line">curl -o woniuxy.html https://www.woniuxy.com</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>wget</li>
+</ul>
+<p>作用: 用来下载工具</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#step1: 安装wget</span></span><br><span class="line">yum -y install wget</span><br><span class="line"></span><br><span class="line"><span class="comment">#step2: 使用wget下载软件</span></span><br><span class="line">语法: wget [选项] url地址</span><br><span class="line"><span class="comment"># 选项</span></span><br><span class="line">-c 断点续传</span><br><span class="line">-b 后台下载</span><br><span class="line"></span><br><span class="line"><span class="comment">#示例: 在线下载jdk</span></span><br><span class="line">方式1: wget https://repo.huaweicloud.com/java/jdk/8u151-b12/jdk-8u151-linux-x64.tar.gz</span><br><span class="line"></span><br><span class="line">方式2: curl -o jdk-8u151-linux https://repo.huaweicloud.com/java/jdk/8u151-b12/jdk-8u151-linux-x64.t</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-安装软件"><a href="#3-2-安装软件" class="headerlink" title="3-2 安装软件"></a>3-2 安装软件</h3><blockquote>
+<p>Linux系统中安装软件有四种方式:</p>
+<p>(1)  绿色版安装 (*.tar.gz)–解压和配置环境变量 </p>
+<p>(2)  yum 在线下载(*.rpm)并安装  –等同于软件管家</p>
+<p>(3)  离线包的安装 (*.rpm)</p>
+<p>(4)  源码安装 -(<code>*.c,*.cpp,</code> ) 编译,安装</p>
+</blockquote>
+<h4 id="3-2-1-yum工具"><a href="#3-2-1-yum工具" class="headerlink" title="3-2-1 yum工具"></a>3-2-1 yum工具</h4><blockquote>
+<p>定义：<code>Yellow dog Updater</code>，软件管理工具包，管理rpm包</p>
+</blockquote>
+<ul>
+<li>语法</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">yum <span class="section">[选项]</span> 命令</span><br><span class="line"></span><br><span class="line"><span class="comment"># 命令</span></span><br><span class="line">install: 安装</span><br><span class="line">remove: 卸载</span><br><span class="line">list: 列表</span><br><span class="line">update: 更新</span><br><span class="line">search: 查找</span><br><span class="line">clean: 清空yum过期缓存</span><br><span class="line">makecache: 刷新缓存</span><br><span class="line"></span><br><span class="line"><span class="comment"># 操作</span></span><br><span class="line">-y: 安装过程直接同意</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置yum下载源</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 1) 备份</span></span><br><span class="line"><span class="built_in">cp</span>  /etc/yum.repos.d/CentOS-Base.repo   /etc/yum.repos.d/CentOS-Base.repo.back</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2) 直接下载镜像文件直接替换</span></span><br><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo   https://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">默认情况下，wget 会将下载的文件保存为 URL 中的原始文件名（如 https://example.com/file.zip 会保存为 file.zip）。</span><br><span class="line">使用 -O 可覆盖此行为，将文件重命名为任意自定义名称。</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3) 清除旧的无效的缓存</span></span><br><span class="line">yum clean all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4) 刷新缓存</span></span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>yum常用操作</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment">#(1) 搜索</span></span><br><span class="line"><span class="comment"># 查找程序</span></span><br><span class="line">yum search 程序名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查当前使用的下载源镜像仓库类型</span></span><br><span class="line">yum repolist</span><br><span class="line"></span><br><span class="line"><span class="comment">#(2) 删除已经安装的程序</span></span><br><span class="line">yum remove 程序名</span><br><span class="line"></span><br><span class="line"><span class="comment">#(3) 安装软件包</span></span><br><span class="line">yum -y install 程序名</span><br><span class="line"></span><br><span class="line"><span class="comment">#(4) 查询已经安装好的软件</span></span><br><span class="line">yum list | grep &quot;软件名关键字名&quot;</span><br><span class="line">例: yum list | grep &quot;net-tools&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="案例1-使用yum安装httpd服务"><a href="#案例1-使用yum安装httpd服务" class="headerlink" title="案例1: 使用yum安装httpd服务"></a>案例1: 使用yum安装httpd服务</h5><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment">#step1: 安装httpd</span></span><br><span class="line">yum -y install httpd</span><br><span class="line"><span class="comment">#step2: 启动httpd</span></span><br><span class="line">systemctl start httpd</span><br><span class="line"></span><br><span class="line"><span class="comment">#step3: 设置开机启动</span></span><br><span class="line">systemctl enable httpd</span><br><span class="line"><span class="comment">#设置开机不启动</span></span><br><span class="line">systemctl disable httpd</span><br><span class="line"></span><br><span class="line"><span class="comment">#step4: 验证http</span></span><br><span class="line"><span class="comment"># 80端口</span></span><br><span class="line"><span class="comment"># 进入到win系统，在浏览器中输入网址</span></span><br><span class="line">http://ip:端口</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编写网页内容</span></span><br><span class="line">cd /var/www/html/</span><br><span class="line">vi index.html</span><br><span class="line">编辑：hello world!</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">       &lt;title&gt;我的网页&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">          欢迎访问我的网页!!!</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">保存</span><br><span class="line">再去访问http://ip:端口</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-2-rpm工具"><a href="#3-2-2-rpm工具" class="headerlink" title="3-2-2 rpm工具"></a>3-2-2 rpm工具</h4><blockquote>
+<p><strong>rpm命令</strong> 是RPM软件包的管理工具。 类似windows中的<code>*.exe</code>,<code>*.msi</code>..安装包</p>
+</blockquote>
+<ul>
+<li>语法</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">rpm <span class="section">[选项]</span>  <span class="section">[参数]</span></span><br><span class="line"></span><br><span class="line">-qa: query all 显示当前系统中所有以rpm方式安装的所有的软件列表</span><br><span class="line">-qi: query infomation info，查看指定包的各种信息：名称、版本、许可证..</span><br><span class="line">-ql: list，所有的文件列表</span><br><span class="line">-qf: file, 查看指定文件是哪个包安装的</span><br><span class="line">-v: 显示指令执行过程；</span><br><span class="line">-vv: 详细显示指令执行过程，便于排错</span><br><span class="line"></span><br><span class="line">示例:</span><br><span class="line"><span class="comment">#查看net-tools软件包中的文件列表</span></span><br><span class="line">rpm -ql net-tools</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看软件包的信息</span></span><br><span class="line">rpm -qi net-tools</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看是否已安装某个软件包</span></span><br><span class="line">rpm -qa | grep &quot;xx&quot;  筛选已安装的软件包</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如何通过rpm安装程序</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">-- 安装</span><br><span class="line">rpm -ivh 包名</span><br><span class="line">如果在安装时,出现依赖检查,某个依赖的软件包没有先安装,则会安装失败</span><br><span class="line"></span><br><span class="line">-- 卸载</span><br><span class="line">rpm -e --nodeps 包名 </span><br><span class="line">其中,--nodeps选项表示忽略依赖关系,直接卸载。</span><br><span class="line">    如果不使用此选项,可能会因为依赖问题导致卸载失败</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># -i: install</span></span><br><span class="line"><span class="comment"># -v: verbose 显示执行过程，日志</span></span><br><span class="line"><span class="comment"># -h：在安装过程中显示带有 # 的进度条</span></span><br><span class="line"><span class="comment"># --nodeps是Linux的rpm命令中的一个,用于安装,升级或卸载软件包时跳过依赖关系检查</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="案例2-使用rpm安装mysql数据库"><a href="#案例2-使用rpm安装mysql数据库" class="headerlink" title="案例2:使用rpm安装mysql数据库"></a>案例2:使用rpm安装mysql数据库</h5><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment">#step1: 上传mysql 服务端与客户端安装包</span></span><br><span class="line">scp E:\GP\Course\PBET-NetSecure-I\工具相关\MySQL-server-5.6.51-1.el7.x86_64.rpm root@192.168.128.140:/opt</span><br><span class="line"></span><br><span class="line">scp E:\GP\Course\PBET-NetSecure-I\工具相关\MySQL-client-5.6.51-1.el7.x86_64.rpm root@192.168.128.140:/opt</span><br><span class="line"></span><br><span class="line"><span class="comment">#step2: 卸载掉残留的mariadb - [Linux系统自带的mysql 数据库]</span></span><br><span class="line"><span class="comment"># 查看系统中是否安装了mariadb</span></span><br><span class="line">rpm -qa | grep &quot;mariadb&quot;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行卸载mariadb命令</span></span><br><span class="line">rpm -e --nodeps mariadb-libs-5.5.68-1.el7.x86_64</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除mysql目录</span></span><br><span class="line">whereis mysql  <span class="comment"># 查看mysql目录</span></span><br><span class="line">rm -rf mysql  <span class="comment">#删除目标目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#step3: 开始安装mysql服务端</span></span><br><span class="line">cd /opt</span><br><span class="line">rpm -ivh MySQL-server-5.6.51-1.el7.x86_64.rpm</span><br><span class="line"></span><br><span class="line">注意:如果安装时,出现&quot;依赖检测失败&quot; 则我们需要先安装依赖的软件包:</span><br><span class="line">yum -y install net-tools</span><br><span class="line">yum -y install perl</span><br><span class="line">yum -y install autoconf</span><br><span class="line">然后再次安装</span><br><span class="line">系统提示root的随机密码是:  /root/.mysql_secret 文件中</span><br><span class="line"></span><br><span class="line"><span class="comment">#step4: 安装mysql客户端</span></span><br><span class="line">rpm -ivh MySQL-client-5.6.51-1.el7.x86_64.rpm</span><br><span class="line"></span><br><span class="line"><span class="comment">#step5: 查看安装的MySQL软件信息:</span></span><br><span class="line">rpm -qa | grep -i &quot;mysql&quot;</span><br><span class="line"><span class="comment">#------------------------------------#</span></span><br><span class="line">MySQL-server-5.6.51-1.el7.x86_64</span><br><span class="line">MySQL-client-5.6.51-1.el7.x86_64</span><br><span class="line"><span class="comment">#------------------------------------#</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#step6: 开启mysql服务</span></span><br><span class="line">systemctl start mysql</span><br><span class="line"></span><br><span class="line"><span class="comment">#step7: 尝试本地登录，修改随机密码为固定密码</span></span><br><span class="line">mysqladmin -uroot -p password 123456</span><br><span class="line">输入旧密码:xxxxx  <span class="section">[输入原始的随机密码]</span>   --可通过cat /root/.mysql_secret查看</span><br><span class="line"></span><br><span class="line"><span class="comment">#step8: 使用新密码登录mysql</span></span><br><span class="line">mysql -uroot -p123456</span><br></pre></td></tr></table></figure>
+
+<h5 id="案例3-把woniu进销存项目部署至Linux服务器"><a href="#案例3-把woniu进销存项目部署至Linux服务器" class="headerlink" title="案例3:把woniu进销存项目部署至Linux服务器"></a>案例3:把woniu进销存项目部署至Linux服务器</h5><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment">#step1: 导入数据库文件</span></span><br><span class="line">上传woniusales.sql文件</span><br><span class="line">scp H:\网安资料\网安一阶段工具及环境包\web项目\woniusales.sql root@192.168.128.140:/opt</span><br><span class="line"></span><br><span class="line"><span class="comment">#(1)登录mysql之后 mysql -uroot -p123456</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#(2)创建woniusales数据库</span></span><br><span class="line">mysql&gt; create database woniusales default character set utf8<span class="comment">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#(3)切换当前使用的数据库</span></span><br><span class="line">mysql&gt; use woniusales<span class="comment">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#(4)查看当前数据库中的表信息</span></span><br><span class="line">mysql&gt; show tables<span class="comment">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#(5) 导入woniusales.sql</span></span><br><span class="line">mysql&gt; source woniusales.sql</span><br><span class="line"></span><br><span class="line"><span class="comment">#step2:上传项目包至/opt/apache-tomcat-9.0.68目录中的webapps/</span></span><br><span class="line">scp H:\网安资料\网安一阶段工具及环境包\web项目\woniusales.war root@192.168.128.140:/opt/apache-tomcat-9.0.68/webapps</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动tomcat服务,woniusales.war项目自动解压</span></span><br><span class="line">/opt/start</span><br><span class="line"></span><br><span class="line"><span class="comment">#step3: 修改woniusales项目的数据库配置文件</span></span><br><span class="line">vi /opt/apache-tomcat-9.0.68/webapps/woniusales/WEB-INF/classes/db.properties</span><br><span class="line"></span><br><span class="line"><span class="attr">db_url</span>=jdbc:mysql://localhost:<span class="number">3306</span>/woniusales?useUnicode=<span class="literal">true</span>&amp;characterEncoding=utf8</span><br><span class="line"><span class="attr">db_username</span>=root</span><br><span class="line"><span class="attr">db_password</span>=<span class="number">123456</span>  <span class="comment"># 密码改为当前数据库服务器的密码</span></span><br><span class="line"><span class="attr">db_driver</span>=com.mysql.jdbc.Driver</span><br><span class="line">~                                                                                     保存退出</span><br><span class="line">重启tomcat服务器: /opt/stop  /opt/start</span><br><span class="line"></span><br><span class="line"><span class="comment">#step4: 通过物理机浏览器访问woniusales项目 </span></span><br><span class="line">http://192.168.128.140:8080/woniusales</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-3-源码安装"><a href="#3-2-3-源码安装" class="headerlink" title="3-2-3 源码安装"></a>3-2-3 源码安装</h4><p>四个步骤</p>
+<figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">1.解压</span><br><span class="line">2.运行配置文件</span><br><span class="line">3.编译</span><br><span class="line">4.安装</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/gaopeng220250724162020.png" alt="image-20250724162019548"></p>
+<h2 id="4-Linux-进程与网络命令"><a href="#4-Linux-进程与网络命令" class="headerlink" title="4.Linux-进程与网络命令"></a>4.Linux-进程与网络命令</h2><h3 id="4-1-进程相关"><a href="#4-1-进程相关" class="headerlink" title="4-1 进程相关"></a>4-1 进程相关</h3><h4 id="4-1-1-概述"><a href="#4-1-1-概述" class="headerlink" title="4-1-1 概述"></a>4-1-1 概述</h4><figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">进程（Process） 计算机操作系统执行应用程序就会产生相应的进程，是系统进行资源分配的基本单位，是操作系统结构的基础。</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-1-2-查看进程命令"><a href="#4-1-2-查看进程命令" class="headerlink" title="4-1-2 查看进程命令"></a>4-1-2 查看进程命令</h4><ul>
+<li>ps</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">语法:  ps <span class="section">[参数]</span>  : 报告当前系统的正在运行的进程状态，类比任务管理器</span><br><span class="line"></span><br><span class="line">常用的参数：</span><br><span class="line">a: 当前终端下的所有进程信息 包含其他用户的进程</span><br><span class="line">u: 以用户为主的格式来显示程序状况。</span><br><span class="line">x: 显示所有终端的所有进程信息<span class="section">[含没有终端的如 ?]</span></span><br><span class="line">-e: 显示所有进程</span><br><span class="line">-l: 以详细的模式展示进程</span><br><span class="line">-f: 显示UID,C与STIME栏位</span><br><span class="line"></span><br><span class="line">示例:</span><br><span class="line">ps -aux </span><br><span class="line">-----------------------------</span><br><span class="line">USER: 用户</span><br><span class="line">PID ：进程号</span><br><span class="line">%CPU ：CPU占用百分比</span><br><span class="line">%MEM    ：内存占用百分比</span><br><span class="line">VSZ  ：占用虚拟内存（swap空间，物理磁盘）空间的大小</span><br><span class="line">RSS ：常驻内存（物理内存）大小</span><br><span class="line">TTY : 表示进程，在哪个终端上运行，?表示不需要终端运行</span><br><span class="line">STAT ：显示进程状态，如 S（休眠）、R（运行）、Z（僵死）、&lt;（高优先级）、N（低优先级）、s（父进程）、＋（前台进程）。该程序应该已经终止，但是其父程序却无法正常的终止他，造成 zombie (僵尸) 程序的状态</span><br><span class="line">START  ：启动的时间</span><br><span class="line">TIME ：运行时间，占用CPU时间</span><br><span class="line">COMMAND：启动该进程的名字。</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/gaopeng220250724162659.png" alt="image-20250724162659046"></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ps -ef  查看所有的进程信息</span><br><span class="line"></span><br><span class="line">[root@localhost opt]# ps -ef</span><br><span class="line">UID         PID   PPID  C STIME TTY          TIME CMD</span><br><span class="line">root          1      0  0 09:39 ?        00:00:04 /usr/lib/systemd/systemd --switched-root --system --deserialize 22</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看mysql进程信息</span></span><br><span class="line">ps -ef | grep <span class="string">&quot;mysql&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>top命令</li>
+</ul>
+<p>定义：是一个动态的进程检测程序，每3s刷新一次。</p>
+<p>类似windows的任务管理器 ,输入q退出</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">top</span><br><span class="line"></span><br><span class="line">快捷键:</span><br><span class="line">按 P 键根据 CPU 占用情况对进程列表进行排序</span><br><span class="line">按 M 键根据内存占用情况进行排序</span><br><span class="line">按 N 键根据启动时间进行排序</span><br><span class="line">按 h 键可以获得 top程序的在线帮助信息</span><br><span class="line">按 q 键可以正常地退出 top 程序  也可以终止进程 ctrl+c</span><br><span class="line">按 k 键后输入PID号后可以直接中止进程 等同于 kill -9</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>pgrep命令</li>
+</ul>
+<p>作用:用于查找进程</p>
+<p>类似于<code>ps -ef | grep &quot;xxx&quot;</code></p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment">#语法</span></span><br><span class="line">pgrep <span class="section">[选项]</span> &quot;正则表达式&quot; </span><br><span class="line"></span><br><span class="line">常用选项 ：</span><br><span class="line">-l 输出列表对应的进程名称</span><br><span class="line">-U 指定用户进程</span><br><span class="line"></span><br><span class="line"><span class="comment">#示例：</span></span><br><span class="line">pgrep -l &quot;^s&quot;  进程名称是s开头的    <span class="comment"># 依从性  &quot;s$&quot; 进程名是以s结尾的</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看root用户的sshd的进程信息</span></span><br><span class="line">pgrep -l sshd -U root </span><br></pre></td></tr></table></figure>
+
+<h4 id="4-1-3-进程控制命令"><a href="#4-1-3-进程控制命令" class="headerlink" title="4-1-3 进程控制命令"></a>4-1-3 进程控制命令</h4><ul>
+<li>后台运行</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">语法:  </span><br><span class="line">   命令  &amp;</span><br><span class="line">   </span><br><span class="line">示例:</span><br><span class="line"><span class="comment">#在后台运行ping命令</span></span><br><span class="line">ping www.baidu.com &amp;</span><br><span class="line"><span class="section">[1]</span> 62477</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看后台进程</span></span><br><span class="line"> ps -ef | grep 62477 | grep -v &quot;grep&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>挂起当前进程</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">快捷键: ctrl+z</span><br><span class="line"></span><br><span class="line">ping www.baidu.com</span><br><span class="line">PING www.a.shifen.com (183.2.172.177) 56(84) bytes of data.</span><br><span class="line">64 bytes from 183.2.172.177 (183.2.172.177): <span class="attr">icmp_seq</span>=<span class="number">1</span> ttl=<span class="number">128</span> time=<span class="number">23.1</span> ms</span><br><span class="line">^Z</span><br><span class="line"><span class="section">[1]</span>+  已停止               ping www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>恢复挂起的进程</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">fg 进程序号</span><br><span class="line"><span class="comment">#后台切换到前台</span></span><br><span class="line">fg 1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看被挂起的进程</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">jobs -l</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>中止进程</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">快捷键: ctrl+c 中止当前正在运行的进程</span><br><span class="line"></span><br><span class="line">kill命令:</span><br><span class="line">      kill命令,使用PID号作为参数,使用`-9`选项强制中止</span><br><span class="line">      </span><br><span class="line">语法: </span><br><span class="line">    kill <span class="section">[选项]</span> 进程编号</span><br><span class="line">    </span><br><span class="line">HUP     1    终端挂断</span><br><span class="line">INT     2    中断（同 Ctrl + C）</span><br><span class="line">QUIT    3    退出（同 Ctrl + \）</span><br><span class="line">KILL    9    强制终止</span><br><span class="line">TERM   15    终止</span><br><span class="line">CONT   18    继续（与STOP相反，fg/bg命令）</span><br><span class="line">STOP   19    暂停（同 Ctrl + Z） </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#杀死进程 62477</span></span><br><span class="line">kill -9 62477</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-1-4-系统服务控制命令"><a href="#4-1-4-系统服务控制命令" class="headerlink" title="4-1-4 系统服务控制命令"></a>4-1-4 系统服务控制命令</h4><p>命令:  systemctl</p>
+<p>作用: 主要对系统的服务进行管理(启动,停止,查看状态,开机自启,…)</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl start/stop/restart/status/enable/disable 服务名</span><br><span class="line"></span><br><span class="line"><span class="comment">#关闭防火墙(临时)</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line"></span><br><span class="line"><span class="comment">#禁用防火墙,重启后不会启动</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line"></span><br><span class="line"><span class="comment">#重启防火墙</span></span><br><span class="line">systemctl restart firewalld</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看防火墙状态</span></span><br><span class="line">systemctl status firewalld</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置开机自动启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> firewalld</span><br><span class="line">---------------------------------------------------------</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看系统中所有的服务</span></span><br><span class="line">systemctl list-units</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看系统中服务开机自启的状态</span></span><br><span class="line">systemctl list-unit-files </span><br><span class="line"></span><br><span class="line"><span class="comment">#示例:查看所有开机自启的服务</span></span><br><span class="line">systemctl list-unit-files | grep <span class="string">&quot;enabled&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-网络相关"><a href="#4-2-网络相关" class="headerlink" title="4-2 网络相关"></a>4-2 网络相关</h3><h4 id="4-2-1-网络工具"><a href="#4-2-1-网络工具" class="headerlink" title="4-2-1 网络工具"></a>4-2-1 网络工具</h4><ul>
+<li>iproute2</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">这个是linux自带的网络工具包，比如：ip addr</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>net-tools</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">这个是linux的第三方套装工具，比如：netstat -antp查看端口占用，ifconfig</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>iproute2与net-tools工具比较</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>iproute2套装工具命令</th>
+<th>net-tools套装工具命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ip addr</td>
+<td>ifconfig</td>
+<td>查看网卡信息，IP、MAC等</td>
+</tr>
+<tr>
+<td>ip neigh</td>
+<td>arp</td>
+<td>查看arp缓存</td>
+</tr>
+<tr>
+<td>ip -s link</td>
+<td>ifconfig -s</td>
+<td>查看查看网卡收发数据包的大小（RX：收、TX：发）</td>
+</tr>
+<tr>
+<td>ip addr add 192.168.100.100&#x2F;24 dev ens33</td>
+<td>ifconfig add ens33 192.168.100.100&#x2F;24</td>
+<td>为ens33网卡添加一个临时的IP地址</td>
+</tr>
+<tr>
+<td>ip addr del 192.168.100.100&#x2F;24 dev ens33</td>
+<td>ifconfig del ens33 192.168.100.100&#x2F;24</td>
+<td>为ens33网卡删除一个IP地址</td>
+</tr>
+<tr>
+<td>ip route</td>
+<td>route -n netstat -r</td>
+<td>查看路由表</td>
+</tr>
+<tr>
+<td>ip route add 192.168.30.0&#x2F;24 via 192.168.188.2</td>
+<td>route add -net 192.168.50.0&#x2F;24 gw 192.168.188.5</td>
+<td>添加路由条目</td>
+</tr>
+<tr>
+<td>ip route del 192.168.30.0&#x2F;24 via 192.168.188.2</td>
+<td>route del -net 192.168.50.0&#x2F;24 gw 192.168.188.5</td>
+<td>删除路由条目</td>
+</tr>
+<tr>
+<td></td>
+<td>route add default gw 192.168.188.2</td>
+<td>添加默认路由</td>
+</tr>
+<tr>
+<td></td>
+<td>netstat -anpt</td>
+<td>: all n:number p:process id t :tcp</td>
+</tr>
+</tbody></table>
+<h4 id="4-2-2-网络命令"><a href="#4-2-2-网络命令" class="headerlink" title="4-2-2 网络命令"></a>4-2-2 网络命令</h4><ul>
+<li>netstat</li>
+</ul>
+<p>作用: 查看 网络协议及进程与端口的状态信息</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">netstat -anpt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-a：显示当前主机中所有活动的网络连接信息（包括监听、非监听状态的服务端口）。</span><br><span class="line">-n：以数字的形式显示相关的主机地址、端口等信息。</span><br><span class="line">-r：显示路由表信息。</span><br><span class="line">-l：显示处于监听（Listening）状态的网络连接及端口信息。</span><br><span class="line">-t：查看 TCP（Transmission Control Protocol，传输控制协议）相关的信息。</span><br><span class="line">-u：显示 UDP（User Datagram Protocol，用户数据报协议）协议相关的信息。</span><br><span class="line">-p：显示与网络连接相关联的进程号pid、进程名称信息（该选项需要 root 权限）。 process</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ifconfig</li>
+</ul>
+<p>作用:查看网卡的配置信息</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">[root@attack yum.repos.d]# ifconfig</span><br><span class="line">ens33: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 192.168.128.140  netmask 255.255.255.0  broadcast 192.168.190.255</span><br><span class="line">        inet6 fe80::f82c:470f:fa45:a323  prefixlen 64  scopeid 0x20&lt;<span class="built_in">link</span>&gt;</span><br><span class="line">        ether 00:0c:29:<span class="built_in">df</span>:52:84  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 4554014  bytes 1441406905 (1.3 GiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 6006616  bytes 1769825576 (1.6 GiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ping</li>
+</ul>
+<p>作用: 检测网络是否通</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ping baidu.com        <span class="comment"># DNS解析</span></span><br><span class="line">ping 192.168.7.41     <span class="comment"># </span></span><br><span class="line"></span><br><span class="line">常见参数</span><br><span class="line">-c &lt;完成次数&gt;：设置完成要求回应的次数；</span><br><span class="line">-I &lt;网络界面&gt;：使用指定的网络界面送出数据包；</span><br><span class="line">-s&lt;数据包大小&gt;：设置数据包的大小；</span><br><span class="line">-t&lt;存活数值&gt;：设置存活数值TTL的大小；</span><br><span class="line">-w&lt;超时秒数&gt;：无论之前发送或接受了多少包，只要超过此秒数，程序退出；waittime，等待时间</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只接收3个回包</span></span><br><span class="line">ping -c 3 www.baidu.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只接收1个回包,如果超过1秒,则程序终止</span></span><br><span class="line">ping -c 1 -w 1 www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>traceroute路由跳转查看</li>
+</ul>
+<p> 作用: 路由追踪</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">安装：</span><br><span class="line">yum -y install traceroute</span><br><span class="line"></span><br><span class="line">traceroute www.woniuxy.com</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>nslookup dns配置查看</li>
+</ul>
+<p>安装</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yum -y install bind-utils</span><br></pre></td></tr></table></figure>
+
+<p>解析域名</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nslookup www.woniuxy.com</span><br><span class="line">Server:         192.168.128.2</span><br><span class="line">Address:        192.168.128.2#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer: <span class="comment">#非权威应答 </span></span><br><span class="line">Name: www.woniuxy.com</span><br><span class="line">Address: 101.37.65.91</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>tcpdump</li>
+</ul>
+<p>作用:用于流量捕获 类似wireshark工具</p>
+<blockquote>
+<p>主要是用来抓包、嗅探器工具，可以打印所有经过网络接口的数据包的头信息，可以使用-w把数据包保存到文件中以便分析,类似于wireshark工具。</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#安装</span></span><br><span class="line">yum install -y tcpdump </span><br><span class="line"></span><br><span class="line"><span class="comment">#tcpdump 语法</span></span><br><span class="line">tcpdump -i 网卡名称 </span><br><span class="line"></span><br><span class="line"><span class="comment">#示例:</span></span><br><span class="line">tcpdump -i ens33   <span class="comment"># 捕获网卡ens33所有的数据包</span></span><br><span class="line">tcpdump -i ens33 icmp <span class="comment"># 捕获icmp协议包</span></span><br><span class="line">tcpdump -i ens33 tcp port 80    <span class="comment"># 捕获网卡ens33中80端口所有的TCP数据包</span></span><br><span class="line">tcpdump -i ens33 tcp port 80 -w /opt/aaa.pcap   <span class="comment"># 捕获网卡ens33中80端口所有的TCP数据包 把数据包写入到/opt/aaa.pcap 可以下载到本地使用wireshark查看</span></span><br><span class="line">tcpdump -i ens33 -c 100 <span class="comment"># 捕获网卡ens33所有的数据包，数据包到100个后自动停止</span></span><br><span class="line">tcpdump -i ens33 tcp port 80  and host 192.168.190.1 <span class="comment"># 过滤访问的host</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">选项</span><br><span class="line">-a：尝试将网络和广播地址转换成名称；</span><br><span class="line">-c&lt;数据包数目&gt;：收到指定的数据包数目后，就停止进行倾倒操作；</span><br><span class="line">-d：把编译过的数据包编码转换成可阅读的格式，并倾倒到标准输出；</span><br><span class="line">-<span class="built_in">dd</span>：把编译过的数据包编码转换成C语言的格式，并倾倒到标准输出；</span><br><span class="line">-ddd：把编译过的数据包编码转换成十进制数字的格式，并倾倒到标准输出；</span><br><span class="line">-e：在每列倾倒资料上显示连接层级的文件头；</span><br><span class="line">-f：用数字显示网际网络地址；</span><br><span class="line">-F&lt;表达文件&gt;：指定内含表达方式的文件；</span><br><span class="line">-i&lt;网络界面&gt;：使用指定的网络界面送出数据包；</span><br><span class="line">-l：使用标准输出列的缓冲区；</span><br><span class="line">-n：不把主机的网络地址转换成名字；</span><br><span class="line">-N：不列出域名；</span><br><span class="line">-O：不将数据包编码最佳化；</span><br><span class="line">-p：不让网络界面进入混杂模式；</span><br><span class="line">-q ：快速输出，仅列出少数的传输协议信息；</span><br><span class="line">-r&lt;数据包文件&gt;：从指定的文件读取数据包数据；</span><br><span class="line">-s&lt;数据包大小&gt;：设置每个数据包的大小；</span><br><span class="line">-S：用绝对而非相对数值列出TCP关联数；</span><br><span class="line">-t：在每列倾倒资料上不显示时间戳记；</span><br><span class="line">-tt： 在每列倾倒资料上显示未经格式化的时间戳记；</span><br><span class="line">-T&lt;数据包类型&gt;：强制将表达方式所指定的数据包转译成设置的数据包类型；</span><br><span class="line">-v：详细显示指令执行过程；</span><br><span class="line">-vv：更详细显示指令执行过程；</span><br><span class="line">-x：用十六进制字码列出数据包资料；</span><br><span class="line">-w&lt;数据包文件&gt;：把数据包数据写入指定的文件。</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-3-网络IP配置"><a href="#4-2-3-网络IP配置" class="headerlink" title="4-2-3 网络IP配置"></a>4-2-3 网络IP配置</h4><blockquote>
+<p> 修改动态IP为静态IP</p>
+</blockquote>
+<p>在centos中有网卡文件，我们可以通过修改<code>网卡文件</code>来配置网络</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment">#(1) 编辑网卡文件（编辑之前，备份网卡文件）</span></span><br><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-ens33</span><br><span class="line"></span><br><span class="line"><span class="comment">#(2) 修改</span></span><br><span class="line"><span class="attr">BOOTPROTO</span>=<span class="string">&quot;static&quot;</span></span><br><span class="line"><span class="attr">IPADDR</span>=<span class="string">&quot;192.168.7.234&quot;</span></span><br><span class="line"><span class="attr">GATEWAY</span>=<span class="string">&quot;192.168.7.2&quot;</span></span><br><span class="line"><span class="attr">NETMASK</span>=<span class="string">&quot;255.255.255.0&quot;</span></span><br><span class="line"><span class="attr">DNS1</span>=<span class="string">&quot;114.114.114.144&quot;</span></span><br><span class="line"><span class="attr">DNS2</span>=<span class="string">&quot;8.8.8.8&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#(3)  保存</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#(4) 重启网卡服务 # 如果起不来，那么检查网卡文件</span></span><br><span class="line">systemctl restart network </span><br><span class="line"></span><br><span class="line"><span class="comment">#(5) 通过 ifconfig查看IP</span></span><br><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-4-SSH免密登录"><a href="#4-2-4-SSH免密登录" class="headerlink" title="4-2-4 SSH免密登录"></a>4-2-4 SSH免密登录</h4><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/gaopeng220250724180744.png" alt="image-20250724180743797" style="zoom:80%;" />
+
+<p>实现过程:</p>
+<ul>
+<li>step1:在物理机作为客户端上生成公钥和私钥</li>
+</ul>
+<p>使用<code>ssh-keygen</code>，然后回车3次，生成对应的公钥和私钥</p>
+<blockquote>
+<p><strong>如果把公钥上传到目标服务器，则，我可以使用私钥 免密登录别人的服务器</strong></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ssh-keygen</span><br><span class="line"></span><br><span class="line">id_rsa  id_rsa.pub  <span class="comment">#.pub是公钥，前面的是私钥       public 公共的</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>step2: 把公钥复制到Linux服务器中</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#进入用户目录</span></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="comment">#在用户目录创建.ssh文件夹</span></span><br><span class="line"><span class="built_in">mkdir</span> .ssh</span><br><span class="line"><span class="comment">#进入到.ssh文件</span></span><br><span class="line"><span class="built_in">cd</span> .ssh</span><br><span class="line">把公钥复制到.ssh目录</span><br><span class="line">把公钥重命名为authorized_keys</span><br><span class="line">[root@localhost .ssh]# <span class="built_in">mv</span> id_rsa.pub authorized_keys</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>step3:ssh使用私钥进行远程连接</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">语法: ssh -i /root/.ssh/id_rsa B电脑的账号@B电脑的ip</span><br><span class="line"></span><br><span class="line"><span class="comment">#客户端连接服务器</span></span><br><span class="line"><span class="comment"># ssh -i id_rsa root@192.168.128.140</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>备注:</p>
+<p>如果使用上述免密方式登录时,提示输入密码,则可能生成私钥有问题,也有可能是服务器linux的ssh公钥授权登录功能未开启</p>
+<p>如果是ssh公钥登录未开启, 则按以下步骤:</p>
+<p>step1:    vi &#x2F;etc&#x2F;ssh&#x2F;sshd_config</p>
+<p>step2:   输入&#x2F; 搜索 PubkeyAuthentication  </p>
+<p>PubkeyAuthentication yes   <font color=red>#将前面#去掉</font></p>
+<p>保存退出 wq</p>
+<p>step3: 重启sshd服务</p>
+<p>systemctl restart sshd</p>
+</blockquote>
+<p><strong>注意:</strong> .ssh放在哪个用户的家目录连上去就是哪个用户</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323130307580.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323130307580.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">北辰</div><div class="post-copyright__author_desc">记录学习,每天进步!</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2026/03/23/Linux%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85+%E8%BF%9B%E7%A8%8B+%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2026/03/23/Linux%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85+%E8%BF%9B%E7%A8%8B+%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4/')">Linux下载安装+进程+网络命令</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323143350183.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323143350183.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2026/03/23/Linux%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85+%E8%BF%9B%E7%A8%8B+%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Linux下载安装+进程+网络命令&amp;url=http://example.com/2026/03/23/Linux%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85+%E8%BF%9B%E7%A8%8B+%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4/&amp;pic=https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323130307580.jpg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">北辰的BLOG</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Linux/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Linux<span class="tagsPageCount">3</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323130307580.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2026/03/23/Linux%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Linux进阶命令</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2026/03/23/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" title="Linux基础命令"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-23</div><div class="title">Linux基础命令</div></div></a></div><div><a href="/2026/03/23/Linux%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4/" title="Linux进阶命令"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-23</div><div class="title">Linux进阶命令</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323130307580.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description"></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%99%E5%AD%A6%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">教学目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%99%E5%AD%A6%E5%86%85%E5%AE%B9"><span class="toc-number">2.</span> <span class="toc-text">教学内容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%99%A8%E8%80%83%E5%A4%8D%E4%B9%A0"><span class="toc-number">2.1.</span> <span class="toc-text">1.晨考复习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BD%9C%E4%B8%9A%E9%97%AE%E9%A2%98-%E8%A7%A3%E5%8E%8B%E9%85%8D%E7%BD%AEtomcat"><span class="toc-number">2.2.</span> <span class="toc-text">2.作业问题-解压配置tomcat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Linux-%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85"><span class="toc-number">2.3.</span> <span class="toc-text">3.Linux-下载与安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.3.1.</span> <span class="toc-text">3-1 下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="toc-number">2.3.2.</span> <span class="toc-text">3-2 安装软件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-yum%E5%B7%A5%E5%85%B7"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">3-2-1 yum工具</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B1-%E4%BD%BF%E7%94%A8yum%E5%AE%89%E8%A3%85httpd%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.3.2.1.1.</span> <span class="toc-text">案例1: 使用yum安装httpd服务</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-rpm%E5%B7%A5%E5%85%B7"><span class="toc-number">2.3.2.2.</span> <span class="toc-text">3-2-2 rpm工具</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B2-%E4%BD%BF%E7%94%A8rpm%E5%AE%89%E8%A3%85mysql%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.3.2.2.1.</span> <span class="toc-text">案例2:使用rpm安装mysql数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B3-%E6%8A%8Awoniu%E8%BF%9B%E9%94%80%E5%AD%98%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E8%87%B3Linux%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">2.3.2.2.2.</span> <span class="toc-text">案例3:把woniu进销存项目部署至Linux服务器</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85"><span class="toc-number">2.3.2.3.</span> <span class="toc-text">3-2-3 源码安装</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Linux-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">2.4.</span> <span class="toc-text">4.Linux-进程与网络命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E8%BF%9B%E7%A8%8B%E7%9B%B8%E5%85%B3"><span class="toc-number">2.4.1.</span> <span class="toc-text">4-1 进程相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1-%E6%A6%82%E8%BF%B0"><span class="toc-number">2.4.1.1.</span> <span class="toc-text">4-1-1 概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E5%91%BD%E4%BB%A4"><span class="toc-number">2.4.1.2.</span> <span class="toc-text">4-1-2 查看进程命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-3-%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%91%BD%E4%BB%A4"><span class="toc-number">2.4.1.3.</span> <span class="toc-text">4-1-3 进程控制命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-4-%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E6%8E%A7%E5%88%B6%E5%91%BD%E4%BB%A4"><span class="toc-number">2.4.1.4.</span> <span class="toc-text">4-1-4 系统服务控制命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3"><span class="toc-number">2.4.2.</span> <span class="toc-text">4-2 网络相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">4-2-1 网络工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2-%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">2.4.2.2.</span> <span class="toc-text">4-2-2 网络命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-3-%E7%BD%91%E7%BB%9CIP%E9%85%8D%E7%BD%AE"><span class="toc-number">2.4.2.3.</span> <span class="toc-text">4-2-3 网络IP配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-4-SSH%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95"><span class="toc-number">2.4.2.4.</span> <span class="toc-text">4-2-4 SSH免密登录</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/23/Linux%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85+%E8%BF%9B%E7%A8%8B+%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4/" title="Linux下载安装+进程+网络命令">Linux下载安装+进程+网络命令</a><time datetime="2026-03-23T12:20:02.000Z" title="发表于 2026-03-23 20:20:02">2026-03-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/23/Linux%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4/" title="Linux进阶命令">Linux进阶命令</a><time datetime="2026-03-23T10:28:05.000Z" title="发表于 2026-03-23 18:28:05">2026-03-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/23/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" title="Linux基础命令">Linux基础命令</a><time datetime="2026-03-22T16:35:02.000Z" title="发表于 2026-03-23 00:35:02">2026-03-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/22/hello-world/" title="Hello World">Hello World</a><time datetime="2026-03-22T15:52:18.119Z" title="发表于 2026-03-22 23:52:18">2026-03-22</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2026 By <a class="footer-bar-link" href="/" title="北辰" target="_blank">北辰</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">1</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://ghosttender.github.io/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/ghosttender/bbb/test/20260323130307580.jpg" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.7.1",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 北辰 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
